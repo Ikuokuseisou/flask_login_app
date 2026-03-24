@@ -27,10 +27,12 @@ Flaskを用いて作成したシンプルなユーザー認証システムです
 - Werkzeug
 
 ## 起動方法
-pip install flask flask_sqlalchemy werkzeug  
-python app.py  
+pip install -r requirements.txt
+python app.py
 
-http://127.0.0.1:5000
+ブラウザで　http://127.0.0.1:5000　にアクセス
+
+
 
 ## 今後の改善
 - バリデーション追加
