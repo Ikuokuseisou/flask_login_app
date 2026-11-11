@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <form action="/todo/{{ todo.id }}/edit" method="POST">
+        <input name="title" type="text" value="{{ todo.title }}">
+        <button type="submit">編集</button>
+
+    </form>
+
+</html>

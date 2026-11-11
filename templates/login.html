@@ -1,27 +1,12 @@
 <!DOCTYPE html>
-<h2>ログイン</h2>
+<html lang="ja">
+    <h1> Login page</h1>
 
-{% if error %}
-  <p style="color: red;">{{ error }}</p>
-{% endif %}
-
-<form method="POST">
-
-   <div>
-    <input type="text" name="username" placeholder="アカウント名">
-   </div>
-
-   <div>
-    <input type="password" name="password" placeholder="パスワード">
-   </div> 
-
-   <div>
+   <form action="/login" method="post">
+    <input type="text" name="username">
+    <input type="password" name="password">
     <button type="submit">ログイン</button>
-   </div>
 
-</form>
+   </form>
 
-<p>
-    アカウントお持ちでない方は
-    <a href="/register">こちら</a>
-</p>
+</html>

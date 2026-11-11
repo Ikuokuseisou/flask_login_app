@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <div>マイページ</div>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+  <body>
+
+    <div class="container" >
+    こんにちは、{{ user.username }}さん
+
+    <form action="/mypage" method="GET">
+
+      <input type="text" name="keyword" value="{{ keyword }}" placeholder="検索">
+      <button>検索</button>
+    </form>
+    
+    <form action="/todo/add" method="post" class="mb-3">
+      <input type="text" name="title" placeholder="タイトル" class="form-control">
+       <div class="d-flex gap-3 align-items-center">
+        <input type="radio" name="priority" value="3">高
+
+        <input type="radio" name="priority" value="2" checked>中
+
+        <input type="radio" name="priority" value="1">低
+
+        <button type="submit" class="btn btn-primary">追加</button>
+        </div>
+    </form>
+
+      {% for category,message in get_flashed_messages(with_categories=True) %}
+        <p class="alert alert-{{ category }}">{{ message }}</p>
+      {% endfor %}
+
+    {% if todos%}
+    {% for todo in todos %}
+
+     
+          <P>{{ todo.title }} </P>
+          <br> 
+          作成時間：
+          {{ todo.created_at.strftime("%Y-%m-%d %H:%M") }}
+          <br>
+          最終編集時間：
+          {{ todo.updated_at.strftime("%Y-%m-%d %H:%M")}}
+          <br>
+          {% if todo.priority == 3 %}
+              優先順位：高
+          {% elif todo.priority == 2 %}
+              優先順位：中
+          {% else %}
+              優先順位：低
+          {% endif %}
+        
+
+           {% if todo.completed %}
+        <span>完了</span>
+    {% else %}
+        <span>未完成</span>
+
+    {% endif %}
+        
+        <form action="/todo/{{ todo.id }}/toggle" method = "POST">
+      <button type="submit ">完了状態を切り替える</button>
+        </form>
+
+        <a href="/todo/{{ todo.id }}/edit">編集</a>
+      
+      <form action="{{ url_for('todo_delete',todo_id=todo.id) }}" method="POST">
+        <button type="submit" class="btn btn-danger">削除</button>
+
+      </form>
+      
+        {% endfor %}
+      
+    {% else %}
+        <p>Todoはまだありません</p>
+    {% endif %}
+
+
+
+    </form>
+
+    </div>
+
+    </body>
+
+  </body>
+</html>
